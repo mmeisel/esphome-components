@@ -388,7 +388,9 @@ void MitsubishiUART::handle_thermostat_state_download_request(const GetRequestPa
 
 #ifdef USE_TIME
   if (this->time_sync_) {
-    response.set_timestamp(this->time_source_->now().timestamp);
+    auto now = this->time_source_->now().timestamp;
+    ESP_LOGD(TAG, "Setting time to %d", now);
+    response.set_timestamp(now);
   } else {
     ESP_LOGW(TAG, "Time source is not synchronized. Cannot provide accurate time!");
     response.set_timestamp(1704067200);  // 2024-01-01 00:00:00Z
