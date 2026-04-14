@@ -68,7 +68,7 @@ class MitsubishiUART : public PollingComponent, public climate::Climate, public 
   void register_listener(MITPListener *listener) { this->listeners_.push_back(listener); }
 
   // Temperature Source config
-  void set_temperature_source_timeout_ms(const uint32_t timeout) { this->temperature_source_timout_ms_ = timeout; }
+  void set_temperature_source_timeout_ms(const uint32_t timeout) { this->temperature_source_timeout_ms_ = timeout; }
   void set_temperature_source_echo_ms(const uint32_t echo_interval) {
     this->temperature_source_echo_ms_ = echo_interval;
   }
@@ -194,7 +194,7 @@ class MitsubishiUART : public PollingComponent, public climate::Climate, public 
   std::string selected_temperature_source_ = TEMPERATURE_SOURCE_INTERNAL;
   bool temperature_source_timeout_ = false;  // Has the current source timed out?
   std::map<std::string, TemperatureReport> temperature_reports_;
-  uint32_t temperature_source_timout_ms_ =
+  uint32_t temperature_source_timeout_ms_ =
       420000;  // 7min default, some heat pumps revert on their own after 10min, some ~60seconds
   uint32_t temperature_source_echo_ms_ = 0;              // 0 = off by default
   uint32_t temperature_source_echo_last_timestamp_ = 0;  // Timestamp of last sent temperature
